@@ -214,13 +214,11 @@ class Landing extends Component {
                 <Sidebar></Sidebar>
                 <div id="page-content-wrapper">
                     <Navbar></Navbar>
-                    <div className="m-3">
+                    <div className="m-3 pt-5">
                     <Styles>
                         <Table columns={columns} data={data} />
                     </Styles>
                     </div>
-                    
-
                 </div>
             </div>
         )

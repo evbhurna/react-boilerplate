@@ -6,7 +6,7 @@ export default class Sidebar extends Component {
     constructor() {
         super();
         this.state = {
-        };
+        };  
     }
 
     componentDidMount() {
@@ -15,11 +15,11 @@ export default class Sidebar extends Component {
 
     render() {
         return (
-            <div className="border-right text-white bg-dark" id="sidebar-wrapper">
+            <div className="border-right text-white bg-dark" id="sidebar-wrapper" style={{position: "fixed"}}>
                 <div className="sidebar-heading list-group-item-action sidebar-group bg-dark">
                     <b className="text-white">{APPNAME}</b>
                 </div>
-                <div className="list-group list-group-flush">
+                <div className="list-group list-group-flush" style={{overflowY:"scroll", height:"80vh"}}>
                     <div>
                         <div className="sidebar-group">
                             <Link to="/" className="list-group-item list-group-item-action text-white sidebar-group bg-dark">

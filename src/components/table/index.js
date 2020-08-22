@@ -3,11 +3,9 @@ import styled from 'styled-components'
 import { useTable, usePagination, useSortBy } from 'react-table'
 
 export const Styles = styled.div`
-  /* This is required to make the table full-width */
   display: block;
   max-width: 100%;
 
-  /* This will make the table scrollable when it gets too small */
   .tableWrap {
     display: block;
     max-width: 100%;
@@ -15,8 +13,6 @@ export const Styles = styled.div`
   }
 
   table {
-
-    /* Make sure the inner table is always as wide as needed */
     width: 100%;
     border-spacing: 0;
 
@@ -39,22 +35,15 @@ export const Styles = styled.div`
     }
   }
 
-  .pagination {
-    padding: 0.5rem;
-  }
 `
 
 export function Table({ columns, data }) {
-    // Use the state and functions returned from useTable to build your UI
     const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
         prepareRow,
-        page, // Instead of using 'rows', we'll use page,
-        // which has only the rows for the active page
-
-        // The rest of these things are super handy, too ;)
+        page, 
         canPreviousPage,
         canNextPage,
         pageOptions,
@@ -72,119 +61,108 @@ export function Table({ columns, data }) {
         },
         useSortBy,
         usePagination,
-
     )
 
     // Render the UI for your table
     return (
         <>
-        <div className="card p-2">
-            <div className="tableWrap">
-                <table {...getTableProps()} className="table-striped table-bordered table-hover">
-                    <thead>
-                        {headerGroups.map(headerGroup => (
-                            <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map(column => (
-                                    // Add the sorting props to control sorting. For this example
-                                    // we can add them into the header props
-                                    <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                        {column.render('Header')}
-                                        {/* Add a sort direction indicator */}
-                                        <span>
-                                            {column.isSorted
-                                                ? column.isSortedDesc
-                                                    ? ' 🔽'
-                                                    : ' 🔼'
-                                                : ''}
-                                        </span>
-                                    </th>
-                                ))}
-                            </tr>
-                        ))}
-                    </thead>
-                    <tbody {...getTableBodyProps()}>
-                        {page.map((row, i) => {
-                            prepareRow(row)
-                            return (
-                                <tr {...row.getRowProps()}>
-                                    {row.cells.map(cell => {
-                                        return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                                    })}
+            <div className="card p-2">
+                <div className="tableWrap">
+                    <table {...getTableProps()} className="table-striped table-bordered table-hover">
+                        <thead>
+                            {headerGroups.map(headerGroup => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map(column => (
+                                        // Add the sorting props to control sorting. For this example
+                                        // we can add them into the header props
+                                        <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                            {column.render('Header')}
+                                            {/* Add a sort direction indicator */}
+                                            <span>
+                                                {column.isSorted
+                                                    ? column.isSortedDesc
+                                                        ? ' 🔽'
+                                                        : ' 🔼'
+                                                    : ''}
+                                            </span>
+                                        </th>
+                                    ))}
                                 </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
-                <div>Showing {pageSize} results of {data.length} rows</div>
-            </div>
-            {/* 
-          Pagination can be built however you'd like. 
-          This is just a very basic UI implementation:
-        */}
-</div>
-
-
-        <div className="card p-2">
-        <div className="row">
-                <div className="col-md-4 my-2">
-                    <button className="btn btn-primary m-1" onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-                        <i className="material-icons">first_page</i>
-                    </button>{' '}
-                    <button className="btn btn-primary m-1" onClick={() => previousPage()} disabled={!canPreviousPage}>
-                        <i className="material-icons">chevron_left</i>
-                    </button>{' '}
-                    <button className="btn btn-primary m-1" onClick={() => nextPage()} disabled={!canNextPage}>
-                        <i className="material-icons">chevron_right</i>
-                    </button>{' '}
-                    <button className="btn btn-primary m-1" onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-                        <i className="material-icons">last_page</i>
-                    </button>{' '}
+                            ))}
+                        </thead>
+                        <tbody {...getTableBodyProps()}>
+                            {page.map((row, i) => {
+                                prepareRow(row)
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                        {row.cells.map(cell => {
+                                            return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                        })}
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
+                    <div>Showing {pageSize} results of {data.length} rows</div>
                 </div>
-                <div className="col-md-4 my-2">
-                    <span>
-                        <strong style={{ verticalAlign: "middle" }}>
-                            Page{' '}
-                            {pageIndex + 1} of {pageOptions.length}
-                        </strong>{' '}
+            </div>
+            <div className="card p-2">
+                <div className="row">
+                    <div className="col-md-4 my-2">
+                        <button className="btn btn-primary m-1" onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+                            <i className="material-icons">first_page</i>
+                        </button>{' '}
+                        <button className="btn btn-primary m-1" onClick={() => previousPage()} disabled={!canPreviousPage}>
+                            <i className="material-icons">chevron_left</i>
+                        </button>{' '}
+                        <button className="btn btn-primary m-1" onClick={() => nextPage()} disabled={!canNextPage}>
+                            <i className="material-icons">chevron_right</i>
+                        </button>{' '}
+                        <button className="btn btn-primary m-1" onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+                            <i className="material-icons">last_page</i>
+                        </button>{' '}
+                    </div>
+                    <div className="col-md-4 my-2">
+                        <span>
+                            <strong style={{ verticalAlign: "middle" }}>
+                                Page{' '}
+                                {pageIndex + 1} of {pageOptions.length}
+                            </strong>{' '}
                     &nbsp;&nbsp;| Go to page:{' '}
-                        <input
-                            className="form-control d-inline"
-                            type="number"
-                            defaultValue={pageIndex + 1}
-                            onChange={e => {
-                                const page = e.target.value ? Number(e.target.value) - 1 : 0
-                                gotoPage(page)
-                            }}
-                            style={{ width: '100px' }}
-                            min="1"
-                            max={pageOptions.length}
-                        />
-                    </span>{' '}
-
-                </div>
-                <div className="col-md-4 my-2">
-                Show entries
+                            <input
+                                className="form-control d-inline"
+                                type="number"
+                                defaultValue={pageIndex + 1}
+                                onChange={e => {
+                                    const page = e.target.value ? Number(e.target.value) - 1 : 0
+                                    gotoPage(page)
+                                }}
+                                style={{ width: '100px' }}
+                                min="1"
+                                max={pageOptions.length}
+                            />
+                        </span>{' '}
+                    </div>
+                    <div className="col-md-4 my-2">
+                        Show entries
                     <select
-                        className="form-control d-inline mx-2"
-                        style={{ width: '100px' }}
-                        value={pageSize}
-                        onChange={e => {
-                            setPageSize(Number(e.target.value))
-                        }}
-                    >
-                        {[10, 20, 30].map(pageSize => (
-                            <option key={pageSize} value={pageSize}>
-                                {pageSize} 
-                            </option>
-                        ))}
-                    </select>
-                    
+                            className="form-control d-inline mx-2"
+                            style={{ width: '100px' }}
+                            value={pageSize}
+                            onChange={e => {
+                                setPageSize(Number(e.target.value))
+                            }}
+                        >
+                            {[10, 20, 30].map(pageSize => (
+                                <option key={pageSize} value={pageSize}>
+                                    {pageSize}
+                                </option>
+                            ))}
+                        </select>
+
+                    </div>
                 </div>
             </div>
-
-        </div>
-
-
         </>
     )
 }
