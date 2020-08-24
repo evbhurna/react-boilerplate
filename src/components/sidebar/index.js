@@ -15,7 +15,7 @@ export default class Sidebar extends Component {
 
     render() {
         return (
-            <div className="border-right text-white bg-dark" id="sidebar-wrapper" style={{position: "fixed"}}>
+            <div className="border-right text-white bg-dark fixed-top" id="sidebar-wrapper">
                 <div className="sidebar-heading list-group-item-action sidebar-group bg-dark">
                     <b className="text-white">{APPNAME}</b>
                 </div>

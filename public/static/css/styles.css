@@ -4,7 +4,7 @@ body {
     width: 100%;
     background-color: #eee;
     overflow-x: hidden;
-    
+
   }
 
   a{
@@ -25,12 +25,8 @@ body {
     margin: 0;
   }
 
-
 #sidebar-wrapper {
   height: 100vh;
-  top: 0; /* Position the navbar at the top of the page */
-
-  
   font-family: 'Roboto', sans-serif;
   font-size: 13px; 
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
@@ -41,19 +37,19 @@ body {
   -moz-transition: margin .25s ease-out;
   -o-transition: margin .25s ease-out;
   transition: margin .25s ease-out;
-
+  position: fixed;
+  -webkit-backface-visibility: hidden;
 }
 
 #sidebar-wrapper > ::-webkit-scrollbar {
-  width: 8px;               /* width of the entire scrollbar */
+  width: 8px;
 }
 #sidebar-wrapper > ::-webkit-scrollbar-track {
-  background: #292b2c;        /* color of the tracking area */
+  background: #292b2c;
 }
 #sidebar-wrapper > ::-webkit-scrollbar-thumb {
-  background-color: #777;    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
-/* creates padding around scroll thumb */
+  background-color: #777;
+  border-radius: 20px;
 }
 
 #sidebar-wrapper .sidebar-heading {
@@ -80,6 +76,7 @@ body {
 
 #page-content-wrapper {
   min-width: 100vw;
+  overflow-x: hidden;
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -133,7 +130,6 @@ body {
   #wrapper.toggled #sidebar-wrapper {
     margin-left: -15rem;
   }
-
 }
 
 .material-icons{
