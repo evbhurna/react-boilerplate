@@ -1,1 +1,1 @@
-export const APPNAME = "Web Application"
+export const APPNAME = "Cloud NDC"
